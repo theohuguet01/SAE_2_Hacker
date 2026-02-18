@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/s_string.h"
+#include "../include/s_math.h"
 
 int main(void) {
 
@@ -38,6 +39,38 @@ int main(void) {
     printf("strncat  : '%s'\n", x2);
     printf("match    : %s\n", strcmp(x1, x2) == 0 ? "OK" : "NO");
     printf("ret==x1  : %s\n", (ret2 == x1) ? "OK" : "NO");
+
+
+    /* ==========================
+       Test s_div
+    ========================== */
+    printf("\n---- TEST s_div ----\n");
+{
+    int n = -5, d = 3;
+
+    div_t r1 = s_div(n, d);
+    div_t r2 = div(n, d);
+
+    printf("s_div: quot=%d rem=%d\n", r1.quot, r1.rem);
+    printf("div : quot=%d rem=%d\n", r2.quot, r2.rem);
+    printf("match: %s\n", (r1.quot == r2.quot && r1.rem == r2.rem) ? "OK" : "NO");
+}
+
+    
+    /* ==========================
+       Test s_fopen
+    ========================== */
+    printf("\n---- TEST s_fopen ----\n");
+    FILE *f = s_fopen("testfile.txt", "w");
+    if (!f) {
+        perror("s_fopen");
+    } else {
+        fputs("Hello Worlds !!!\n", f);
+        fclose(f);   // (pour l’instant tu peux fermer avec fclose, puis tu feras s_fclose)
+        puts("OK: fichier créé et écrit");
+    }
+
+
 
     return 0;
 }
