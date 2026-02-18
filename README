@@ -1,0 +1,64 @@
+# Super libc (s_libc)
+
+## Description
+Bibliothèque C implémentée en assembleur x86 32 bits (GNU AS, syntaxe AT&T).
+Ce projet réécrit des fonctions classiques de la libc en assembleur afin de mieux
+comprendre le fonctionnement bas niveau des programmes informatiques.
+
+## Fonctions implémentées
+
+### s_string.h
+- s_strlen, s_strcpy, s_strncpy, s_strcat, s_strncat, s_strcmp, s_strncmp, s_strchr
+
+### s_math.h
+- s_abs, s_div, s_pow
+
+### s_stdio.h
+- s_puts
+
+### s_stdlib.h
+- s_atoi, s_exit
+
+## Compilation
+
+### Compiler la bibliothèque
+```
+make all
+```
+
+### Compiler et lancer les tests
+```
+make test
+LD_LIBRARY_PATH=lib ./test_s_libc
+```
+
+### Nettoyer les fichiers temporaires
+```
+make clean
+```
+
+### Installer la bibliothèque sur le système
+```
+make install
+```
+
+## Arborescence
+```
+s_libc_project/
+├── src/          # Fichiers sources assembleur (.s)
+├── include/      # Fichiers d'en-tête (.h)
+├── lib/          # Bibliothèque compilée (.so)
+├── test/         # Fichier de test (main.c)
+├── build/        # Fichiers temporaires de compilation
+├── doc/          # Documentation
+├── Makefile
+└── README
+```
+
+## Auteurs
+- [Nom 1]
+- [Nom 2]
+- [Nom 3]
+
+## Licence
+Projet académique - SAÉ du Hacker
