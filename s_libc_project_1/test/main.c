@@ -2,6 +2,7 @@
 #include <string.h>
 #include "../include/s_string.h"
 #include "../include/s_math.h"
+#include "../include/s_stdio.h"
 
 int main(void) {
 
@@ -45,32 +46,42 @@ int main(void) {
        Test s_div
     ========================== */
     printf("\n---- TEST s_div ----\n");
-{
-    int n = -5, d = 3;
+    {
+        int n = -5, d = 3;
 
-    div_t r1 = s_div(n, d);
-    div_t r2 = div(n, d);
+        div_t r1 = s_div(n, d);
+        div_t r2 = div(n, d);
 
-    printf("s_div: quot=%d rem=%d\n", r1.quot, r1.rem);
-    printf("div : quot=%d rem=%d\n", r2.quot, r2.rem);
-    printf("match: %s\n", (r1.quot == r2.quot && r1.rem == r2.rem) ? "OK" : "NO");
-}
+        printf("s_div: quot=%d rem=%d\n", r1.quot, r1.rem);
+        printf("div : quot=%d rem=%d\n", r2.quot, r2.rem);
+        printf("match: %s\n", (r1.quot == r2.quot && r1.rem == r2.rem) ? "OK" : "NO");
+    }
 
     
     /* ==========================
-       Test s_fopen
+       Test s_fopen et s_fclose
     ========================== */
-    printf("\n---- TEST s_fopen ----\n");
+    printf("\n---- TEST s_fopen / s_fclose ----\n");
+
     FILE *f = s_fopen("testfile.txt", "w");
     if (!f) {
         perror("s_fopen");
     } else {
-        fputs("Hello Worlds !!!\n", f);
-        fclose(f);   // (pour l’instant tu peux fermer avec fclose, puis tu feras s_fclose)
-        puts("OK: fichier créé et écrit");
+        fputs("Hello World !!!\n", f);
+
+        int rc = s_fclose(f);
+        printf("s_fclose returned: %d (%s)\n", rc, (rc == 0) ? "OK" : "ERR");
+
+        /* Vérif simple: ré-ouvrir en lecture et lire */
+        FILE *g = fopen("testfile.txt", "r");
+        if (!g) perror("fopen(read)");
+        else {
+            char buf[32];
+            fgets(buf, sizeof(buf), g);
+            printf("read back: %s", buf);
+            s_fclose(g);
+        }
     }
-
-
 
     return 0;
 }

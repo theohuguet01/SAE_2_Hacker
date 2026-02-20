@@ -1,3 +1,6 @@
+################################
+####### Fonction s_fopen #######
+################################
     .text
     .globl s_fopen
     .type  s_fopen, @function
@@ -22,4 +25,32 @@ s_fopen:
     popl  %ebp
     ret
 
+
+
+###################################
+######## Fonction s_fclose ########
+###################################
+    .text
+    .globl s_fclose
+    .type  s_fclose, @function
+    .extern fclose
+
+# int s_fclose(FILE *stream)
+# arg:
+#   8(%ebp) = stream
+# return:
+#   eax = 0 (succès) ou EOF (-1)
+
+s_fclose:
+    pushl %ebp
+    movl  %esp, %ebp
+
+    pushl 8(%ebp)           # stream
+    call  fclose
+    addl  $4, %esp           # clean stack
+
+    popl  %ebp
+    ret
+
+# Enlever le warning de .GNU-stack
     .section .note.GNU-stack,"",@progbits

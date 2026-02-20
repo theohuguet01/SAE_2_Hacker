@@ -1,3 +1,6 @@
+##############################
+####### Fonction s_div #######
+##############################
     .text
     .globl s_div
     .type  s_div, @function
@@ -31,4 +34,7 @@ s_div:
     popl  %ebp
     ret
 
+
+
+# Enlever le warning de .GNU-stack
     .section .note.GNU-stack,"",@progbits

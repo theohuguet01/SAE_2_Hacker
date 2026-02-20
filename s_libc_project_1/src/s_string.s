@@ -1,3 +1,6 @@
+#################################
+####### Fonction s_strcat #######
+#################################
     .text
     .globl s_strcat
     .type  s_strcat, @function
@@ -35,7 +38,9 @@ s_strcat:
     ret
 
 
-
+##################################
+####### Fonction s_strncat #######
+##################################
      .text
     .globl s_strncat
     .type  s_strncat, @function
