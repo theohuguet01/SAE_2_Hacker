@@ -6,15 +6,16 @@ s_abs:
     pushl %ebp
     movl  %esp, %ebp
 
-    movl  8(%ebp), %eax      # n
+    movl  8(%ebp), %eax      # Charger le paramètre n
     cmpl  $0, %eax
-    jge   .Labs_end          # n >= 0 => return n
+    jge   .Labs_end          # Si n >= 0, retourner n
 
-    # si n == INT_MIN, -n overflow => on retourne INT_MIN tel quel (choix défini)
+    # Cas spécial : si n == INT_MIN, -n causerait un débordement
+    # On retourne INT_MIN tel quel
     cmpl  $0x80000000, %eax
     je    .Labs_end
 
-    negl  %eax               # -n
+    negl  %eax               # Calculer -n
 .Labs_end:
     popl  %ebp
     ret

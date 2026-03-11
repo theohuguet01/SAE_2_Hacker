@@ -3,14 +3,18 @@
     .globl s_exit
     .type  s_exit, @function
 s_exit:
+    # Prologue : sauvegarde du pointeur de base
     pushl %ebp
     movl  %esp, %ebp
 
-    movl  8(%ebp), %ebx      # status
-    movl  $1, %eax           # sys_exit (Linux i386)
+    # Charge le code de retour depuis le paramètre (position 8)
+    movl  8(%ebp), %ebx
+    # Charge le numéro d'appel système exit
+    movl  $1, %eax
+    # Effectue l'appel système pour terminer le programme
     int   $0x80
 
-    # Normalement unreachable
+    # Stop (point d'arrêt, ne doit pas être atteint)
     hlt
     popl  %ebp
     ret
