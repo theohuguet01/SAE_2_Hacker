@@ -84,7 +84,7 @@ s_strncat:
     pushl %ebp                      # sauvegarde l'ancien pointeur de base
     movl  %esp, %ebp                # crée le cadre de pile
 
-    pushl %ebx                      # sauvegarde EBX car c'est un registre callee-saved
+    pushl %ebx                      # sauvegarde EBX
 
     cld                             # met la direction vers l'avant pour les instructions de chaîne
 
