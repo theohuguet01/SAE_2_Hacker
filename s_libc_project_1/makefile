@@ -40,6 +40,9 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.s
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Compile et exécute les tests
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.s
+	$(CC) $(CFLAGS) -c $< -o $@
+
 test: all
 	$(CC) $(CFLAGS) -o $(TEST_EXEC) $(TEST_DIR)/main.c -I$(INC_DIR) -L$(LIB_DIR) -ls_libc
 	@echo ""
@@ -57,3 +60,4 @@ install: all
 	sudo ldconfig
 
 .PHONY: all test clean install
+.PHONY: all test clean
