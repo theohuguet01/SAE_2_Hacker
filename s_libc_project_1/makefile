@@ -61,3 +61,4 @@ install: all
 
 .PHONY: all test clean install
 .PHONY: all test clean
+.PHONY: all test clean install
